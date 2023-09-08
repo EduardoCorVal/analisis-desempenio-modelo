@@ -18,6 +18,9 @@ data = load_digits()
 X = data.data
 y = data.target
 
+# Graficación de los datos
+graph.PCA_graph(X, y)
+
 X_train_initial, X_test, Y_train_initial, Y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 X_train, X_validation, Y_train, Y_validation = train_test_split(X_train_initial, Y_train_initial, test_size=0.2, random_state=0)
 
@@ -36,7 +39,7 @@ print(X_test[:5])
 print(Y_test[:5])
 
 # Modelo de clasificación
-classifier = DecisionTreeClassifier(min_samples_split=2, max_depth=8)
+classifier = DecisionTreeClassifier(max_depth=5, min_samples_split=2)
 classifier.fit(X_train, Y_train)
 
 Y_train_pred = classifier.predict(X_train)

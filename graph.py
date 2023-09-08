@@ -8,6 +8,8 @@ __author__ = "Eduardo Joel Cortez Valente"
 
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.decomposition import PCA
+
 
 # Graficación de los resultados
 # labels = ['Validación', 'Prueba']
@@ -85,4 +87,18 @@ def recall_graph(recalls: list):
     plt.ylabel('Recall Ponderado')
     plt.title('Recall en los Conjuntos de Datos')
     plt.ylim(0, 1)  # Establecer el rango del eje y de 0 a 1 para el recall
+    plt.show()
+    
+def PCA_graph(X, y):
+    # Reducir la dimensionalidad a 2 dimensiones utilizando PCA
+    pca = PCA(n_components=2)
+    X_reduced = pca.fit_transform(X)
+
+    # Graficar los datos reducidos en un scatter plot
+    plt.figure(figsize=(8, 6))
+    plt.scatter(X_reduced[:, 0], X_reduced[:, 1], c=y, cmap=plt.cm.get_cmap('nipy_spectral', 10))
+    plt.colorbar(label='Etiqueta')
+    plt.title('Visualización de los datos después de PCA (2D)')
+    plt.xlabel('Componente Principal 1')
+    plt.ylabel('Componente Principal 2')
     plt.show()
